@@ -1,4 +1,4 @@
-package com.luohong.phoneuse;
+package com.luohong.phoneobserver;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
