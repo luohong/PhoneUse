@@ -1,11 +1,122 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#009a12"
+    android:orientation="vertical">
+    <RadioButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text="@string/Monday"
+        android:button="@null"
+        android:gravity="center"
+        android:textColor="@color/tv_day_selector"
+        android:background="@drawable/tv_shape_selector"/>
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+        
+        <TextView
+            android:id="@+id/tv_monday"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:enabled="true"
+            android:gravity="center"
+            android:onClick="daySelect"
+            android:text="@string/Monday"
+            android:alpha="0.3"
+            android:textColor="@color/tv_day_selector"
+            android:background="@drawable/tv_shape_selector"
+            android:textSize="15sp" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/tv_tuesday"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:enabled="true"
+            android:gravity="center"
+            android:onClick="daySelect"
+            android:text="@string/Tuesday"
+            android:background="@drawable/tv_shape_selector"
+            android:textColor="@color/tv_day_selector"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_wednesday"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:enabled="true"
+            android:gravity="center"
+            android:onClick="daySelect"
+            android:text="@string/Wednesday"
+            android:background="@drawable/tv_shape_selector"
+            android:textColor="@color/tv_day_selector"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_thursday"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:enabled="true"
+            android:gravity="center"
+            android:onClick="daySelect"
+            android:text="@string/Thursday"
+            android:background="@drawable/tv_shape_selector"
+            android:textColor="@color/tv_day_selector"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_friday"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:enabled="true"
+            android:gravity="center"
+            android:onClick="daySelect"
+            android:text="@string/Friday"
+            android:background="@drawable/tv_shape_selector"
+            android:textColor="@color/tv_day_selector"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_saturday"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:enabled="true"
+            android:gravity="center"
+            android:onClick="daySelect"
+            android:text="@string/Saturday"
+            android:background="@drawable/tv_shape_selector"
+            android:textColor="@color/tv_day_selector"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_sunday"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:enabled="true"
+            android:gravity="center"
+            android:onClick="daySelect"
+            android:text="@string/Sunday"
+            android:background="@drawable/tv_shape_selector"
+            android:textColor="@color/tv_day_selector"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+</LinearLayout>
