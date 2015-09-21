@@ -17,12 +17,13 @@ public class MainActivity extends AppCompatActivity {
     private TextView friday;
     private TextView saturday;
     private TextView sunday;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-         monday = (TextView) findViewById(R.id.tv_monday);
+        monday = (TextView) findViewById(R.id.tv_monday);
         tuesday = (TextView) findViewById(R.id.tv_tuesday);
         wednesday = (TextView) findViewById(R.id.tv_wednesday);
         thursday = (TextView) findViewById(R.id.tv_thursday);
@@ -51,33 +52,27 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.tv_tuesday:
                 tuesday.setSelected(true);
-                tuesday.setBackgroundColor(0x4DB85A);
 
                 break;
             case R.id.tv_wednesday:
                 wednesday.setSelected(true);
-                wednesday.setBackgroundColor(0x4DB85A);
 
                 break;
             case R.id.tv_thursday:
                 thursday.setSelected(true);
-                thursday.setBackgroundColor(0x4DB85A);
 
                 break;
             case R.id.tv_friday:
                 friday.setSelected(true);
-                friday.setBackgroundColor(0x4DB85A);
 
                 break;
             case R.id.tv_saturday:
                 saturday.setSelected(true);
-                saturday.setBackgroundColor(0x4DB85A);
 
                 break;
 
             case R.id.tv_sunday:
                 sunday.setSelected(true);
-                sunday.setBackgroundColor(0x4DB85A);
 
                 break;
 

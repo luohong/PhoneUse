@@ -5,15 +5,6 @@
     android:background="#009a12"
     android:orientation="vertical">
 
-    <RadioButton
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@drawable/tv_shape_selector"
-        android:button="@null"
-        android:gravity="center"
-        android:text="@string/Monday"
-        android:textColor="@color/tv_day_selector" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -30,9 +21,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:alpha="0.3"
-                android:background="@drawable/tv_shape_selector"
-                android:clickable="true"
-                android:enabled="true"
+                android:background="@drawable/bg_week_selector"
                 android:gravity="center"
                 android:onClick="daySelect"
                 android:text="@string/Monday"
@@ -41,90 +30,125 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_tuesday"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/tv_shape_selector"
-            android:clickable="true"
-            android:enabled="true"
-            android:gravity="center"
-            android:onClick="daySelect"
-            android:text="@string/Tuesday"
-            android:textColor="@color/tv_day_selector"
-            android:textSize="15sp" />
+            android:gravity="center">
 
-        <TextView
-            android:id="@+id/tv_wednesday"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/tv_shape_selector"
-            android:clickable="true"
-            android:enabled="true"
-            android:gravity="center"
-            android:onClick="daySelect"
-            android:text="@string/Wednesday"
-            android:textColor="@color/tv_day_selector"
-            android:textSize="15sp" />
+            <TextView
+                android:id="@+id/tv_tuesday"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:alpha="0.3"
+                android:background="@drawable/bg_week_selector"
+                android:gravity="center"
+                android:onClick="daySelect"
+                android:text="@string/Tuesday"
+                android:textColor="@color/tv_day_selector"
+                android:textSize="15sp" />
 
-        <TextView
-            android:id="@+id/tv_thursday"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/tv_shape_selector"
-            android:clickable="true"
-            android:enabled="true"
-            android:gravity="center"
-            android:onClick="daySelect"
-            android:text="@string/Thursday"
-            android:textColor="@color/tv_day_selector"
-            android:textSize="15sp" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_friday"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/tv_shape_selector"
-            android:clickable="true"
-            android:enabled="true"
-            android:gravity="center"
-            android:onClick="daySelect"
-            android:text="@string/Friday"
-            android:textColor="@color/tv_day_selector"
-            android:textSize="15sp" />
+            android:gravity="center">
 
-        <TextView
-            android:id="@+id/tv_saturday"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/tv_shape_selector"
-            android:clickable="true"
-            android:enabled="true"
-            android:gravity="center"
-            android:onClick="daySelect"
-            android:text="@string/Saturday"
-            android:textColor="@color/tv_day_selector"
-            android:textSize="15sp" />
+            <TextView
+                android:id="@+id/tv_wednesday"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:alpha="0.3"
+                android:background="@drawable/bg_week_selector"
+                android:gravity="center"
+                android:onClick="daySelect"
+                android:text="@string/Wednesday"
+                android:textColor="@color/tv_day_selector"
+                android:textSize="15sp" />
 
-        <TextView
-            android:id="@+id/tv_sunday"
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/tv_shape_selector"
-            android:clickable="true"
-            android:enabled="true"
-            android:gravity="center"
-            android:onClick="daySelect"
-            android:text="@string/Sunday"
-            android:textColor="@color/tv_day_selector"
-            android:textSize="15sp" />
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tv_thursday"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:alpha="0.3"
+                android:background="@drawable/bg_week_selector"
+                android:gravity="center"
+                android:onClick="daySelect"
+                android:text="@string/Thursday"
+                android:textColor="@color/tv_day_selector"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tv_friday"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:alpha="0.3"
+                android:background="@drawable/bg_week_selector"
+                android:gravity="center"
+                android:onClick="daySelect"
+                android:text="@string/Friday"
+                android:textColor="@color/tv_day_selector"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tv_saturday"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:alpha="0.3"
+                android:background="@drawable/bg_week_selector"
+                android:gravity="center"
+                android:onClick="daySelect"
+                android:text="@string/Saturday"
+                android:textColor="@color/tv_day_selector"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tv_sunday"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:alpha="0.3"
+                android:background="@drawable/bg_week_selector"
+                android:gravity="center"
+                android:onClick="daySelect"
+                android:text="@string/Sunday"
+                android:textColor="@color/tv_day_selector"
+                android:textSize="15sp" />
+
+        </LinearLayout>
 
     </LinearLayout>
-
 </LinearLayout>
