@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView friday;
     private TextView saturday;
     private TextView sunday;
+    private ImageView ivMonday;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         monday = (TextView) findViewById(R.id.tv_monday);
+        ivMonday = (ImageView) findViewById(R.id.iv_monday);
         tuesday = (TextView) findViewById(R.id.tv_tuesday);
         wednesday = (TextView) findViewById(R.id.tv_wednesday);
         thursday = (TextView) findViewById(R.id.tv_thursday);
@@ -37,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     public void daySelect(View view) {
 
         monday.setSelected(false);
+        ivMonday.setSelected(false);
         tuesday.setSelected(false);
         wednesday.setSelected(false);
         thursday.setSelected(false);
@@ -48,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.tv_monday:
                 monday.setSelected(true);
+                ivMonday.setSelected(true);
 
                 break;
             case R.id.tv_tuesday:
