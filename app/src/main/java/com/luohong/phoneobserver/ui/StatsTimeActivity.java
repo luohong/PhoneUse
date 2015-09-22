@@ -1,10 +1,12 @@
-package com.luohong.phoneobserver;
+package com.luohong.phoneobserver.ui;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.luohong.phoneobserver.R;
 
 public class StatsTimeActivity extends Activity implements View.OnClickListener {
     @Override

@@ -1,4 +1,4 @@
-package com.luohong.phoneobserver;
+package com.luohong.phoneobserver.ui;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,6 +8,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.luohong.phoneobserver.R;
+import com.luohong.phoneobserver.bean.Use;
+import com.luohong.phoneobserver.db.UseDb;
+
+import java.util.Calendar;
 
 public class MainActivity extends Activity implements View.OnClickListener {
     private TextView tvMonday;
@@ -30,6 +36,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private TextView yesterdayTime;
     private ImageView ivLocation;
     private ImageView ivSatas;
+    private UseDb mUseDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +44,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_main);
 
         initView();
+        initData();
 
         setClick();
 
@@ -74,7 +82,18 @@ public class MainActivity extends Activity implements View.OnClickListener {
         ivLocation = (ImageView) findViewById(R.id.iv_location);
         ivSatas = (ImageView) findViewById(R.id.iv_stats);
 
+    }
 
+    public void initData() {
+        Calendar calendar = Calendar.getInstance();
+        int week = calendar.get(Calendar.DAY_OF_WEEK);// 国外是从周日开始
+        switch (week) {
+            case 3:
+                daySelect(tvTuesday);
+                break;
+        }
+
+        mUseDb = new UseDb(this);
     }
 
     //周几的监听
@@ -155,6 +174,16 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 break;
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        String today = Use.getToday();
+
+        String todayOpenCount = mUseDb.findOpenCountByDate(today) + "";
+        startCount.setText(todayOpenCount);
     }
 
     private long exitTime = 0;
