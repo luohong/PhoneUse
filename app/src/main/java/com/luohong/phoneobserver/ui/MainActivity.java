@@ -163,15 +163,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_location:
-
+                startActivity(new Intent(this, MapActivity.class));
                 break;
 
             case R.id.iv_stats:
                 Intent intent = new Intent(this, StatsTimeActivity.class);
                 startActivity(intent);
                 break;
-            default:
-                break;
+
         }
 
     }
