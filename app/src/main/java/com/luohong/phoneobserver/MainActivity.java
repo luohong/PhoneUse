@@ -1,12 +1,15 @@
 package com.luohong.phoneobserver;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity implements View.OnClickListener {
     private TextView tvMonday;
     private TextView tvTuesday;
     private TextView tvWednesday;
@@ -21,30 +24,60 @@ public class MainActivity extends AppCompatActivity {
     private ImageView ivFriday;
     private ImageView ivSaturday;
     private ImageView ivSunday;
+    private TextView startCount;
+    private TextView startTime;
+    private TextView yesterdayCount;
+    private TextView yesterdayTime;
+    private ImageView ivLocation;
+    private ImageView ivSatas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        initView();
+
+        setClick();
+
+    }
+
+    private void setClick() {
+
+        ivLocation.setOnClickListener(this);
+        ivSatas.setOnClickListener(this);
+
+    }
+
+    private void initView() {
+
         tvMonday = (TextView) findViewById(R.id.tv_monday);
-        ivMonday = (ImageView) findViewById(R.id.iv_monday);
         tvTuesday = (TextView) findViewById(R.id.tv_tuesday);
-        ivTuesday = (ImageView) findViewById(R.id.iv_tuesday);
         tvWednesday = (TextView) findViewById(R.id.tv_wednesday);
-        ivWednesday = (ImageView) findViewById(R.id.iv_wednesday);
         tvThursday = (TextView) findViewById(R.id.tv_thursday);
-        ivThursday = (ImageView) findViewById(R.id.iv_thursday);
         tvFriday = (TextView) findViewById(R.id.tv_friday);
-        ivFriday = (ImageView) findViewById(R.id.iv_friday);
         tvSaturday = (TextView) findViewById(R.id.tv_saturday);
-        ivSaturday = (ImageView) findViewById(R.id.iv_saturday);
         tvSunday = (TextView) findViewById(R.id.tv_sunday);
+
+        ivMonday = (ImageView) findViewById(R.id.iv_monday);
+        ivTuesday = (ImageView) findViewById(R.id.iv_tuesday);
+        ivWednesday = (ImageView) findViewById(R.id.iv_wednesday);
+        ivThursday = (ImageView) findViewById(R.id.iv_thursday);
+        ivFriday = (ImageView) findViewById(R.id.iv_friday);
+        ivSaturday = (ImageView) findViewById(R.id.iv_saturday);
         ivSunday = (ImageView) findViewById(R.id.iv_sunday);
+
+        startCount = (TextView) findViewById(R.id.start_count);
+        startTime = (TextView) findViewById(R.id.start_time);
+        yesterdayCount = (TextView) findViewById(R.id.yesterday_start_count);
+        yesterdayTime = (TextView) findViewById(R.id.yesterday_start_time);
+        ivLocation = (ImageView) findViewById(R.id.iv_location);
+        ivSatas = (ImageView) findViewById(R.id.iv_stats);
 
 
     }
 
+    //周几的监听
     public void daySelect(View view) {
 
         tvMonday.setSelected(false);
@@ -105,5 +138,39 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_location:
+
+                break;
+
+            case R.id.iv_stats:
+                Intent intent = new Intent(this, StatsTimeActivity.class);
+                startActivity(intent);
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    private long exitTime = 0;
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if ((System.currentTimeMillis() - exitTime) > 2000) {
+                Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                exitTime = System.currentTimeMillis();
+            } else {
+                finish();
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
