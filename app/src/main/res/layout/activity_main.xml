@@ -1,231 +1,234 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbars="none">
+    android:background="#009a12"
+    android:orientation="vertical">
 
-    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#009a12"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_monday"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:alpha="0.3"
+                android:src="@drawable/bg_week_selector" />
+
+            <TextView
+                android:id="@+id/tv_monday"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:clickable="true"
+                android:gravity="center"
+                android:onClick="daySelect"
+                android:text="@string/Monday"
+                android:textColor="@color/tv_day_selector"
+                android:textSize="15sp" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_tuesday"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:alpha="0.3"
+                android:src="@drawable/bg_week_selector" />
+
+            <TextView
+                android:id="@+id/tv_tuesday"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:clickable="true"
+                android:gravity="center"
+                android:onClick="daySelect"
+                android:text="@string/Tuesday"
+                android:textColor="@color/tv_day_selector"
+                android:textSize="15sp" />
+
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_wednesday"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:alpha="0.3"
+                android:src="@drawable/bg_week_selector" />
+
+            <TextView
+                android:id="@+id/tv_wednesday"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:clickable="true"
+                android:gravity="center"
+                android:onClick="daySelect"
+                android:text="@string/Wednesday"
+                android:textColor="@color/tv_day_selector"
+                android:textSize="15sp" />
+
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_thursday"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:alpha="0.3"
+                android:src="@drawable/bg_week_selector" />
+
+            <TextView
+                android:id="@+id/tv_thursday"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:clickable="true"
+                android:gravity="center"
+                android:onClick="daySelect"
+                android:text="@string/Thursday"
+                android:textColor="@color/tv_day_selector"
+                android:textSize="15sp" />
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_friday"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:alpha="0.3"
+                android:src="@drawable/bg_week_selector" />
+
+            <TextView
+                android:id="@+id/tv_friday"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:clickable="true"
+                android:gravity="center"
+                android:onClick="daySelect"
+                android:text="@string/Friday"
+                android:textColor="@color/tv_day_selector"
+                android:textSize="15sp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_saturday"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:alpha="0.3"
+                android:src="@drawable/bg_week_selector" />
+
+            <TextView
+                android:id="@+id/tv_saturday"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:clickable="true"
+                android:gravity="center"
+                android:onClick="daySelect"
+                android:text="@string/Saturday"
+                android:textColor="@color/tv_day_selector"
+                android:textSize="15sp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_sunday"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:alpha="0.3"
+                android:src="@drawable/bg_week_selector" />
+
+            <TextView
+                android:id="@+id/tv_sunday"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:clickable="true"
+                android:gravity="center"
+                android:onClick="daySelect"
+                android:text="@string/Sunday"
+                android:textColor="@color/tv_day_selector"
+                android:textSize="15sp" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
         android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="horizontal">
-
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center">
-
-                <ImageView
-                    android:id="@+id/iv_monday"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:alpha="0.3"
-                    android:src="@drawable/bg_week_selector" />
-
-                <TextView
-                    android:id="@+id/tv_monday"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:clickable="true"
-                    android:gravity="center"
-                    android:onClick="daySelect"
-                    android:text="@string/Monday"
-                    android:textColor="@color/tv_day_selector"
-                    android:textSize="15sp" />
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center">
-
-                <ImageView
-                    android:id="@+id/iv_tuesday"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:alpha="0.3"
-                    android:src="@drawable/bg_week_selector" />
-
-                <TextView
-                    android:id="@+id/tv_tuesday"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:clickable="true"
-                    android:gravity="center"
-                    android:onClick="daySelect"
-                    android:text="@string/Tuesday"
-                    android:textColor="@color/tv_day_selector"
-                    android:textSize="15sp" />
-
-            </FrameLayout>
-
-
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center">
-
-                <ImageView
-                    android:id="@+id/iv_wednesday"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:alpha="0.3"
-                    android:src="@drawable/bg_week_selector" />
-
-                <TextView
-                    android:id="@+id/tv_wednesday"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:clickable="true"
-                    android:gravity="center"
-                    android:onClick="daySelect"
-                    android:text="@string/Wednesday"
-                    android:textColor="@color/tv_day_selector"
-                    android:textSize="15sp" />
-
-            </FrameLayout>
-
-
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center">
-
-                <ImageView
-                    android:id="@+id/iv_thursday"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:alpha="0.3"
-                    android:src="@drawable/bg_week_selector" />
-
-                <TextView
-                    android:id="@+id/tv_thursday"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:clickable="true"
-                    android:gravity="center"
-                    android:onClick="daySelect"
-                    android:text="@string/Thursday"
-                    android:textColor="@color/tv_day_selector"
-                    android:textSize="15sp" />
-            </FrameLayout>
-
-
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center">
-
-                <ImageView
-                    android:id="@+id/iv_friday"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:alpha="0.3"
-                    android:src="@drawable/bg_week_selector" />
-
-                <TextView
-                    android:id="@+id/tv_friday"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:clickable="true"
-                    android:gravity="center"
-                    android:onClick="daySelect"
-                    android:text="@string/Friday"
-                    android:textColor="@color/tv_day_selector"
-                    android:textSize="15sp" />
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center">
-
-                <ImageView
-                    android:id="@+id/iv_saturday"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:alpha="0.3"
-                    android:src="@drawable/bg_week_selector" />
-
-                <TextView
-                    android:id="@+id/tv_saturday"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:clickable="true"
-                    android:gravity="center"
-                    android:onClick="daySelect"
-                    android:text="@string/Saturday"
-                    android:textColor="@color/tv_day_selector"
-                    android:textSize="15sp" />
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center">
-
-                <ImageView
-                    android:id="@+id/iv_sunday"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:alpha="0.3"
-                    android:src="@drawable/bg_week_selector" />
-
-                <TextView
-                    android:id="@+id/tv_sunday"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:clickable="true"
-                    android:gravity="center"
-                    android:onClick="daySelect"
-                    android:text="@string/Sunday"
-                    android:textColor="@color/tv_day_selector"
-                    android:textSize="15sp" />
-
-            </FrameLayout>
-
-        </LinearLayout>
 
         <TextView
             android:id="@+id/start_count"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
             android:gravity="center_horizontal"
             android:text="135"
             android:textColor="@color/white"
-            android:textSize="100sp" />
+            android:textSize="80sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="17dp"
+            android:layout_marginTop="5dp"
             android:gravity="center_horizontal"
             android:text="启动次数"
             android:textColor="@color/white"
@@ -235,64 +238,69 @@
             android:id="@+id/start_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="50dp"
             android:gravity="center_horizontal"
             android:text="12:12:12"
             android:textColor="@color/white"
-            android:textSize="80sp" />
+            android:textSize="50sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="17dp"
+            android:layout_marginTop="5dp"
             android:gravity="center_horizontal"
             android:text="启动时间"
             android:textColor="@color/white"
             android:textSize="30sp" />
 
-        <TextView
-            android:id="@+id/yesterday_start_count"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
-            android:gravity="center_horizontal"
-            android:text="昨天启动次数：236次"
-            android:textColor="@color/white"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/yesterday_start_time"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="17dp"
-            android:gravity="center_horizontal"
-            android:text="昨天启动时间：12小时36分钟"
-            android:textColor="@color/white"
-            android:textSize="15sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="17dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/iv_location"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/abc_btn_radio_material" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <ImageView
-                android:id="@+id/iv_stats"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/abc_btn_radio_material" />
-        </LinearLayout>
-
     </LinearLayout>
-</ScrollView>
+
+    <TextView
+        android:id="@+id/yesterday_start_count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:gravity="center_horizontal"
+        android:text="昨天启动次数：236次"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/yesterday_start_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:gravity="center_horizontal"
+        android:text="昨天启动时间：12小时36分钟"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="17dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_location"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/abc_btn_radio_material" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/iv_stats"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/abc_btn_radio_material" />
+    </LinearLayout>
+
+</RelativeLayout>
