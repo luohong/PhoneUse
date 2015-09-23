@@ -13,7 +13,9 @@ import com.luohong.phoneobserver.R;
 import com.luohong.phoneobserver.bean.Use;
 import com.luohong.phoneobserver.db.UseDb;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends Activity implements View.OnClickListener {
     private TextView tvMonday;
@@ -87,13 +89,32 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public void initData() {
         Calendar calendar = Calendar.getInstance();
         int week = calendar.get(Calendar.DAY_OF_WEEK);// 国外是从周日开始
+        mUseDb = new UseDb(this);
         switch (week) {
+            case 1:
+                daySelect(tvSunday);
+                break;
+            case 2:
+                daySelect(tvMonday);
+                break;
             case 3:
                 daySelect(tvTuesday);
                 break;
+            case 4:
+                daySelect(tvWednesday);
+                break;
+            case 5:
+                daySelect(tvThursday);
+                break;
+            case 6:
+                daySelect(tvFriday);
+                break;
+            case 7:
+                daySelect(tvSaturday);
+                break;
         }
 
-        mUseDb = new UseDb(this);
+
     }
 
     //周几的监听
@@ -114,49 +135,72 @@ public class MainActivity extends Activity implements View.OnClickListener {
         tvSunday.setSelected(false);
         ivSunday.setSelected(false);
 
+        String selectDate =null;
         switch (view.getId()) {
-
             case R.id.tv_monday:
                 tvMonday.setSelected(true);
                 ivMonday.setSelected(true);
 
+                selectDate = searchStartCount(2);
+                startCount.setText(mUseDb.findOpenCountByDate(selectDate) + "");
                 break;
             case R.id.tv_tuesday:
                 tvTuesday.setSelected(true);
                 ivTuesday.setSelected(true);
-
+                selectDate = searchStartCount(3);
+                startCount.setText(mUseDb.findOpenCountByDate(selectDate) + "");
                 break;
             case R.id.tv_wednesday:
                 tvWednesday.setSelected(true);
                 ivWednesday.setSelected(true);
-
+                selectDate = searchStartCount(4);
+                startCount.setText(mUseDb.findOpenCountByDate(selectDate) + "");
                 break;
             case R.id.tv_thursday:
                 tvThursday.setSelected(true);
                 ivThursday.setSelected(true);
-
+                selectDate = searchStartCount(5);
+                startCount.setText(mUseDb.findOpenCountByDate(selectDate) + "");
                 break;
             case R.id.tv_friday:
                 tvFriday.setSelected(true);
                 ivFriday.setSelected(true);
+                selectDate = searchStartCount(6);
+                startCount.setText(mUseDb.findOpenCountByDate(selectDate) + "");
 
                 break;
             case R.id.tv_saturday:
                 tvSaturday.setSelected(true);
                 ivSaturday.setSelected(true);
-
+                selectDate = searchStartCount(7);
+                startCount.setText(mUseDb.findOpenCountByDate(selectDate) + "");
                 break;
 
             case R.id.tv_sunday:
                 tvSunday.setSelected(true);
                 ivSunday.setSelected(true);
-
+                selectDate = searchStartCount(8);
+                startCount.setText(mUseDb.findOpenCountByDate(selectDate) + "");
                 break;
 
             default:
                 break;
 
         }
+    }
+
+    private String searchStartCount(int date) {
+        Date currentDate = new Date();
+        Date dBefore = new Date();
+        int a = date - (Calendar.getInstance().get(Calendar.DAY_OF_WEEK));
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(currentDate);
+        calendar.add(Calendar.DAY_OF_MONTH, a);
+        dBefore = calendar.getTime();
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd"); //设置时间格式
+        String defaultStartDate = sdf.format(dBefore);    //格式化前一天
+        return defaultStartDate;
+
     }
 
     @Override
