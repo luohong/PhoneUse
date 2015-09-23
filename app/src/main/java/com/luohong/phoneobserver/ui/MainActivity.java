@@ -16,6 +16,7 @@ import com.luohong.phoneobserver.db.UseDb;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class MainActivity extends Activity implements View.OnClickListener {
     private TextView tvMonday;
@@ -135,52 +136,43 @@ public class MainActivity extends Activity implements View.OnClickListener {
         tvSunday.setSelected(false);
         ivSunday.setSelected(false);
 
-        String selectDate =null;
         switch (view.getId()) {
             case R.id.tv_monday:
                 tvMonday.setSelected(true);
                 ivMonday.setSelected(true);
 
-                selectDate = searchStartCount(2);
-                startCount.setText(mUseDb.findOpenCountByDate(selectDate) + "");
+                getOpenCountByDate(2);
                 break;
             case R.id.tv_tuesday:
                 tvTuesday.setSelected(true);
                 ivTuesday.setSelected(true);
-                selectDate = searchStartCount(3);
-                startCount.setText(mUseDb.findOpenCountByDate(selectDate) + "");
+                getOpenCountByDate(3);
                 break;
             case R.id.tv_wednesday:
                 tvWednesday.setSelected(true);
                 ivWednesday.setSelected(true);
-                selectDate = searchStartCount(4);
-                startCount.setText(mUseDb.findOpenCountByDate(selectDate) + "");
+                getOpenCountByDate(4);
                 break;
             case R.id.tv_thursday:
                 tvThursday.setSelected(true);
                 ivThursday.setSelected(true);
-                selectDate = searchStartCount(5);
-                startCount.setText(mUseDb.findOpenCountByDate(selectDate) + "");
+                getOpenCountByDate(5);
                 break;
             case R.id.tv_friday:
                 tvFriday.setSelected(true);
                 ivFriday.setSelected(true);
-                selectDate = searchStartCount(6);
-                startCount.setText(mUseDb.findOpenCountByDate(selectDate) + "");
-
+                getOpenCountByDate(6);
                 break;
             case R.id.tv_saturday:
                 tvSaturday.setSelected(true);
                 ivSaturday.setSelected(true);
-                selectDate = searchStartCount(7);
-                startCount.setText(mUseDb.findOpenCountByDate(selectDate) + "");
+                getOpenCountByDate(7);
                 break;
 
             case R.id.tv_sunday:
                 tvSunday.setSelected(true);
                 ivSunday.setSelected(true);
-                selectDate = searchStartCount(8);
-                startCount.setText(mUseDb.findOpenCountByDate(selectDate) + "");
+                getOpenCountByDate(8);
                 break;
 
             default:
@@ -189,17 +181,61 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
     }
 
+    private void getOpenCountByDate(int week) {
+        String selectDate = searchStartCount(week);
+
+        startCount.setText(mUseDb.findOpenCountByDate(selectDate) + "");
+
+        List<Use> list = mUseDb.findAllOnAndOff(selectDate);
+
+        long offset = 0;
+        for (int i = 0; i < list.size(); ) {
+            Use use = list.get(i);
+            if ("on".equals(use.action)) {
+                i = i + 1;
+                if (i < list.size()) {
+                    Use next = list.get(i);
+                    if ("off".equals(next.action)) {
+                        offset += next.time - use.time;
+                    }
+                    i = i + 1;
+                }
+            } else {
+                i = i + 1;
+            }
+        }
+
+        int hour = (int)(offset / (60 * 60 * 1000));
+        int minite = (int)((offset % (60 * 60 * 1000)) / (60 * 1000));
+        int secend = (int)((offset % (60 * 1000)) / 1000);
+
+        StringBuffer time = new StringBuffer();
+        if (Integer.toString(hour).length() == 1) {
+            time.append("0");
+        }
+        time.append(hour).append(":");
+        if (Integer.toString(minite).length() == 1) {
+            time.append("0");
+        }
+        time.append(minite).append(":");
+        if (Integer.toString(secend).length() == 1) {
+            time.append("0");
+        }
+        time.append(secend);
+        startTime.setText(time);
+    }
+
     private String searchStartCount(int date) {
+        int days = date - (Calendar.getInstance().get(Calendar.DAY_OF_WEEK));
+
         Date currentDate = new Date();
-        Date dBefore = new Date();
-        int a = date - (Calendar.getInstance().get(Calendar.DAY_OF_WEEK));
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(currentDate);
-        calendar.add(Calendar.DAY_OF_MONTH, a);
-        dBefore = calendar.getTime();
+        calendar.add(Calendar.DAY_OF_MONTH, days);
+        Date choosedDate = calendar.getTime();
+
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd"); //设置时间格式
-        String defaultStartDate = sdf.format(dBefore);    //格式化前一天
-        return defaultStartDate;
+        return sdf.format(choosedDate);    //格式化
 
     }
 
@@ -223,10 +259,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
     protected void onResume() {
         super.onResume();
 
-        String today = Use.getToday();
-
-        String todayOpenCount = mUseDb.findOpenCountByDate(today) + "";
-        startCount.setText(todayOpenCount);
+        int week = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+        if (week == 1) week = 8;
+        getOpenCountByDate(week);
     }
 
     private long exitTime = 0;

@@ -97,6 +97,30 @@ public class UseDb extends BaseDb {
         return list;
     }
 
+    public List<Use> findAllOnAndOff(String date) {
+        List<Use> list = new ArrayList<Use>();
+
+        String selection = String.format(" %s = ? and ( %s = ? or %s = ?) ", Table.DATE, Table.ACTION, Table.ACTION);
+        String[] selectionArgs = new String[] { date, "on", "off" };
+
+        Cursor cursor = null;
+        try {
+            checkDb();
+            cursor = db.query(Table.TABLE_NAME, Table.PROJECTION, selection, selectionArgs, null, null, Table._ID + " asc" );
+            while (cursor != null && cursor.moveToNext()) {
+                Use use = (Use)parseCursor(cursor);
+                list.add(use);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return list;
+    }
+
     public Use find(String userId) {
         String selection = String.format(" %s = ? ", Table._ID);
         String[] selectionArgs = new String[] { userId };
