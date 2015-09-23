@@ -182,7 +182,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     private void getOpenCountByDate(int week) {
-        String selectDate = searchStartCount(week);
+        int dateOfWeek = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+        String selectDate = searchStartCount(week, dateOfWeek);
 
         startCount.setText(mUseDb.findOpenCountByDate(selectDate) + "");
 
@@ -199,7 +200,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                         offset += next.time - use.time;
                     }
                     i = i + 1;
-                } else {// 当前正在使用
+                } else if (dateOfWeek == week || (week == 8 && dateOfWeek == 1)) {// 当前正在使用
                     offset += System.currentTimeMillis() - use.time;
                 }
             } else {
@@ -227,8 +228,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         startTime.setText(time);
     }
 
-    private String searchStartCount(int date) {
-        int days = date - (Calendar.getInstance().get(Calendar.DAY_OF_WEEK));
+    private String searchStartCount(int date, int dateOfWeek) {
+        int days = date - dateOfWeek;
 
         Date currentDate = new Date();
         Calendar calendar = Calendar.getInstance();
