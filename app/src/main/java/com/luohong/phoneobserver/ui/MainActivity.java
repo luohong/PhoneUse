@@ -199,6 +199,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
                         offset += next.time - use.time;
                     }
                     i = i + 1;
+                } else {// 当前正在使用
+                    offset += System.currentTimeMillis() - use.time;
                 }
             } else {
                 i = i + 1;

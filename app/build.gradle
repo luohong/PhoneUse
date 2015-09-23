@@ -25,4 +25,5 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:22.2.1'
     compile 'com.android.support:design:22.2.1'
     compile files('libs/AMap_Location_v1.4.1_20150917.jar')
+    compile files('libs/AMap_2DMap_v2.6.0_20150916.jar')
 }
