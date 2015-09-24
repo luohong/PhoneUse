@@ -2,6 +2,10 @@ package com.luohong.phoneobserver.ui;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -10,10 +14,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.luohong.phoneobserver.R;
+import com.luohong.phoneobserver.bean.AppInfo;
 import com.luohong.phoneobserver.bean.Use;
 import com.luohong.phoneobserver.db.UseDb;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -50,6 +56,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         initData();
 
         setClick();
+
+
 
     }
 
@@ -208,9 +216,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
             }
         }
 
-        int hour = (int)(offset / (60 * 60 * 1000));
-        int minite = (int)((offset % (60 * 60 * 1000)) / (60 * 1000));
-        int secend = (int)((offset % (60 * 1000)) / 1000);
+        int hour = (int) (offset / (60 * 60 * 1000));
+        int minite = (int) ((offset % (60 * 60 * 1000)) / (60 * 1000));
+        int secend = (int) ((offset % (60 * 1000)) / 1000);
 
         StringBuffer time = new StringBuffer();
         if (Integer.toString(hour).length() == 1) {
@@ -237,7 +245,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         calendar.add(Calendar.DAY_OF_MONTH, days);
         Date choosedDate = calendar.getTime();
 
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd"); //设置时间格式
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); //设置时间格式
         return sdf.format(choosedDate);    //格式化
 
     }
