@@ -6,12 +6,12 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.luohong.phoneobserver.R;
+import com.luohong.phoneobserver.adapter.StatsTimeListViewAdapter;
 import com.luohong.phoneobserver.bean.AppInfo;
 
 import java.util.ArrayList;
@@ -19,6 +19,7 @@ import java.util.List;
 
 public class StatsTimeActivity extends Activity implements View.OnClickListener {
     private ListView mListView;
+    private StatsTimeListViewAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +27,6 @@ public class StatsTimeActivity extends Activity implements View.OnClickListener 
         setContentView(R.layout.activity_satasime);
 
         ImageView back = (ImageView) findViewById(R.id.iv_back);
-
-         mListView = (ListView) findViewById(R.id.lv_stats);
-
 
         PackageManager packageManager = this.getPackageManager();
         List<AppInfo> infos = new ArrayList<>();
@@ -47,6 +45,11 @@ public class StatsTimeActivity extends Activity implements View.OnClickListener 
 
             System.out.println("77777777" + infos.size());
         }
+
+
+        mListView = (ListView) findViewById(R.id.lv_stats);
+         mAdapter = new StatsTimeListViewAdapter(this, infos);
+        mListView.setAdapter(mAdapter);
 
         back.setOnClickListener(this);
     }

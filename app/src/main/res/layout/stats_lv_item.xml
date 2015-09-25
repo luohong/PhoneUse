@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_stas_AppIcon"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:layout_margin="15dp" />
+
+        <TextView
+            android:id="@+id/iv_stats_AppName"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="AppName"
+            android:textColor="@color/statsAppNameColor"
+            android:textSize="@dimen/statsAppName" />
+
+        <TextView
+            android:id="@+id/iv_stats_AppTime"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="15dp"
+            android:gravity="center_vertical"
+            android:text="AppTime"
+            android:textColor="@color/statsAppTimeColor"
+            android:textSize="@dimen/statsAppName" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="48dp"
+        android:background="#dcdcdc" />
+
+</LinearLayout>
