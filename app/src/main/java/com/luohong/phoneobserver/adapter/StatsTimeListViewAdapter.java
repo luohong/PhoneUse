@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.luohong.phoneobserver.R;
-import com.luohong.phoneobserver.bean.AppInfo;
+import com.luohong.phoneobserver.bean.App;
 
 import java.util.List;
 
@@ -18,10 +18,10 @@ import java.util.List;
  */
 public class StatsTimeListViewAdapter extends BaseAdapter {
 
-    private List<AppInfo> infos;
+    private List<App> infos;
     private Context context;
 
-    public StatsTimeListViewAdapter(Context context, List<AppInfo> infos) {
+    public StatsTimeListViewAdapter(Context context, List<App> infos) {
         this.context = context;
         this.infos = infos;
 
@@ -58,8 +58,8 @@ public class StatsTimeListViewAdapter extends BaseAdapter {
 
         holder = (ViewHolder) convertView.getTag();
 
-        holder.AppIcon.setImageDrawable(infos.get(position).getAppIcon());
-        holder.AppName.setText(infos.get(position).getAppName());
+        holder.AppIcon.setImageDrawable(infos.get(position).icon);
+        holder.AppName.setText(infos.get(position).name);
 
         return convertView;
     }

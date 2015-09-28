@@ -9,7 +9,7 @@ public class DbHelper extends SQLiteOpenHelper {
 	
 	private static final String DB_NAME = "db";
 
-	private static final int DATABASE_VERSION = 1;
+	private static final int DATABASE_VERSION = 2;
 
 	private static DbHelper mDbHelper;
 	
@@ -33,14 +33,14 @@ public class DbHelper extends SQLiteOpenHelper {
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		Log.i(getTag(), "onUpgrade");
-//		db.execSQL(CityDb.getDropTableSQL());
+		db.execSQL(AppDb.getDropTableSQL());
 		db.execSQL(UseDb.getDropTableSQL());
 		
 		createTable(db);
 	}
 
 	private void createTable(SQLiteDatabase db) {
-//		db.execSQL(CityDb.getCreateTableSQL());
+		db.execSQL(AppDb.getCreateTableSQL());
 		db.execSQL(UseDb.getCreateTableSQL());
 	}
 

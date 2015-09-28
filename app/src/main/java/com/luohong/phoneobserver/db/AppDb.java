@@ -7,7 +7,7 @@ import android.database.SQLException;
 import android.provider.BaseColumns;
 import android.util.Log;
 
-import com.luohong.phoneobserver.bean.Use;
+import com.luohong.phoneobserver.bean.App;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,25 +15,26 @@ import java.util.List;
 /**
  * Created by luohong on 15/9/22. igufffffffy
  */
-public class UseDb extends BaseDb {
+public class AppDb extends BaseDb {
 
-    private static final String TAG = UseDb.class.getSimpleName();
+    private static final String TAG = AppDb.class.getSimpleName();
 
     public static class Table implements BaseColumns {
 
         public static final String TABLE_NAME = "tb_use";
 
+        public static final String PACKAGE_NAME = "package_name";
         public static final String DATE = "date";
-        public static final String START_TIME = "start_time";
-        public static final String END_TIME = "end_time";
+        public static final String START_TIME = "startTime";
+        public static final String END_TIME = "endTime";
         public static final String DESC = "desc";
 
         public static final String DEFAULT_SORT_ORDER = Table._ID + " DESC";
 
-        public static final String[] PROJECTION = { _ID, DATE, START_TIME, END_TIME, DESC};
+        public static final String[] PROJECTION = { _ID, PACKAGE_NAME, DATE, START_TIME, END_TIME, DESC};
     }
 
-    public UseDb(Context context) {
+    public AppDb(Context context) {
         super(context);
     }
 
@@ -47,10 +48,11 @@ public class UseDb extends BaseDb {
         StringBuilder sb = new StringBuilder();
         sb.append(CREATE_TABLE_PREFIX).append(Table.TABLE_NAME).append(BRACKET_LEFT);
         sb.append(Table._ID).append(COLUMN_TYPE.INTEGER).append(PRIMARY_KEY_AUTOINCREMENT).append(COMMA);
+        sb.append(Table.PACKAGE_NAME).append(COLUMN_TYPE.TEXT).append(COMMA);
         sb.append(Table.DATE).append(COLUMN_TYPE.TEXT).append(COMMA);
         sb.append(Table.START_TIME).append(COLUMN_TYPE.LONG).append(COMMA);
-        sb.append(Table.END_TIME).append(COLUMN_TYPE.TEXT).append(COMMA);
-        sb.append(Table.DESC).append(COLUMN_TYPE.TEXT);
+        sb.append(Table.DESC).append(COLUMN_TYPE.TEXT).append(COMMA);
+        sb.append(Table.END_TIME).append(COLUMN_TYPE.TEXT);
         sb.append(BRACKET_RIGHT);
 
         return sb.toString();
@@ -62,9 +64,10 @@ public class UseDb extends BaseDb {
 
     @Override
     protected Object parseCursor(Cursor cursor) {
-        Use entity = new Use();
+        App entity = new App();
 
         entity.id = cursor.getInt(cursor.getColumnIndexOrThrow(Table._ID));
+        entity.packageName = cursor.getString(cursor.getColumnIndexOrThrow(Table.PACKAGE_NAME));
         entity.date = cursor.getString(cursor.getColumnIndexOrThrow(Table.DATE));
         entity.startTime = cursor.getLong(cursor.getColumnIndexOrThrow(Table.START_TIME));
 		entity.endTime = cursor.getLong(cursor.getColumnIndexOrThrow(Table.END_TIME));
@@ -73,8 +76,8 @@ public class UseDb extends BaseDb {
         return entity;
     }
 
-    public List<Use> findAll() {
-        List<Use> list = new ArrayList<Use>();
+    public List<App> findAll() {
+        List<App> list = new ArrayList<App>();
 
         String selection = null;
         String[] selectionArgs = null;
@@ -84,7 +87,7 @@ public class UseDb extends BaseDb {
             checkDb();
             cursor = db.query(Table.TABLE_NAME, Table.PROJECTION, selection, selectionArgs, null, null, Table._ID + " asc" );
             while (cursor != null && cursor.moveToNext()) {
-                Use use = (Use)parseCursor(cursor);
+                App use = (App)parseCursor(cursor);
                 list.add(use);
             }
         } catch (Exception e) {
@@ -97,8 +100,8 @@ public class UseDb extends BaseDb {
         return list;
     }
 
-    public List<Use> findAllOnAndOff(String date) {
-        List<Use> list = new ArrayList<Use>();
+    public List<App> findAllOnAndOff(String date) {
+        List<App> list = new ArrayList<App>();
 
         String selection = String.format(" %s = ? and ( %s = ? or %s = ?) ", Table.DATE, Table.END_TIME, Table.END_TIME);
         String[] selectionArgs = new String[] { date, "on", "off" };
@@ -108,7 +111,7 @@ public class UseDb extends BaseDb {
             checkDb();
             cursor = db.query(Table.TABLE_NAME, Table.PROJECTION, selection, selectionArgs, null, null, Table._ID + " asc" );
             while (cursor != null && cursor.moveToNext()) {
-                Use use = (Use)parseCursor(cursor);
+                App use = (App)parseCursor(cursor);
                 list.add(use);
             }
         } catch (Exception e) {
@@ -121,17 +124,17 @@ public class UseDb extends BaseDb {
         return list;
     }
 
-    public Use find(String date) {
+    public App find(String date) {
         String selection = String.format(" %s = ? ", Table.DATE);
         String[] selectionArgs = new String[] { date };
 
         Cursor cursor = null;
-        Use use = null;
+        App use = null;
         try {
             checkDb();
             cursor = db.query(Table.TABLE_NAME, Table.PROJECTION, selection, selectionArgs, null, null, Table._ID + " asc limit 1" );
             if (cursor != null && cursor.moveToNext()) {
-                use = (Use)parseCursor(cursor);
+                use = (App)parseCursor(cursor);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -143,17 +146,17 @@ public class UseDb extends BaseDb {
         return use;
     }
 
-    public Use findLastOne(String date) {
-        String selection = String.format(" %s = ? ", Table.DATE);
-        String[] selectionArgs = new String[] { date };
+    public App findLastOne(String packageName, String date) {
+        String selection = String.format(" %s = ? and %s = ? ", Table.PACKAGE_NAME, Table.DATE);
+        String[] selectionArgs = new String[] { packageName, date };
 
         Cursor cursor = null;
-        Use use = null;
+        App use = null;
         try {
             checkDb();
             cursor = db.query(Table.TABLE_NAME, Table.PROJECTION, selection, selectionArgs, null, null, Table._ID + " desc limit 1" );
             if (cursor != null && cursor.moveToNext()) {
-                use = (Use)parseCursor(cursor);
+                use = (App)parseCursor(cursor);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -170,12 +173,12 @@ public class UseDb extends BaseDb {
         String[] selectionArgs = new String[] { date, "on" };
 
         Cursor cursor = null;
-        List<Use> list = new ArrayList<Use>();
+        List<App> list = new ArrayList<App>();
         try {
             checkDb();
             cursor = db.query(Table.TABLE_NAME, Table.PROJECTION, selection, selectionArgs, null, null, Table._ID + " asc" );
             while (cursor != null && cursor.moveToNext()) {
-                Use use = (Use)parseCursor(cursor);
+                App use = (App)parseCursor(cursor);
                 list.add(use);
             }
         } catch (Exception e) {
@@ -189,13 +192,13 @@ public class UseDb extends BaseDb {
         return list.size();
     }
 
-    public void saveAll(List<Use> list) {
+    public void saveAll(List<App> list) {
         checkDb();
         beginTransaction();
         try {
             clearAllData();
             if (list != null && list.size() > 0) {
-                for (Use entity : list) {
+                for (App entity : list) {
                     insert(entity);
                 }
             }
@@ -230,11 +233,12 @@ public class UseDb extends BaseDb {
         return count;
     }
 
-    public void insert(Use entity) {
+    public void insert(App entity) {
         if (entity != null) {
             checkDb();
 
             ContentValues values = new ContentValues();
+            values.put(Table.PACKAGE_NAME, entity.packageName);
             values.put(Table.DATE, entity.date);
             values.put(Table.START_TIME, entity.startTime);
 			values.put(Table.END_TIME, entity.endTime);
@@ -245,7 +249,7 @@ public class UseDb extends BaseDb {
         }
     }
 
-    public void update(Use entity) {
+    public void update(App entity) {
         if (entity != null) {
             checkDb();
 

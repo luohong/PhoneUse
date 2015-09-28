@@ -1,5 +1,7 @@
 package com.luohong.phoneobserver.bean;
 
+import com.luohong.phoneobserver.util.DateUtil;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -10,27 +12,14 @@ public class Use {
 
     public int id;
     public String date;
-    public long time;
-    public String action;
+    public long startTime;
+    public long endTime;
     public String desc;
 
     public Use() {
-
-    }
-
-    public Use(String action) {
-        this.action = action;
-
-        this.time = System.currentTimeMillis();
-
-        this.date = getToday();
-
+        this.startTime = System.currentTimeMillis();
+        this.date = DateUtil.getToday();
         this.desc = "";
     }
 
-    public static String getToday() {
-        Date date = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        return sdf.format(date);
-    }
 }

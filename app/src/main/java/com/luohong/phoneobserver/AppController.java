@@ -7,6 +7,9 @@ import android.util.Log;
 import com.luohong.phoneobserver.bean.Use;
 import com.luohong.phoneobserver.db.UseDb;
 import com.luohong.phoneobserver.receiver.ScreenListener;
+import com.luohong.phoneobserver.service.ObserverService;
+import com.luohong.phoneobserver.util.DateUtil;
+import com.luohong.phoneobserver.util.SpUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -41,44 +44,53 @@ public class AppController extends Application {
 		super.onCreate();
 		mInstance = this;
 
+        SpUtil.getInstance().setAppStartTime();
+        // TODO 标记App是否正常退出，若App非正常退出，则需要使用App的更新时间去更新手机使用记录和App使用记录结束时间
+
         mUseDb = new UseDb(this);
 
 		ScreenListener mListener = new ScreenListener(this);
 		mListener.begin(new ScreenListener.ScreenStateListener() {
 			@Override
 			public void onScreenOn() {
-                mUseDb.insert(new Use("on"));
+                mUseDb.insert(new Use());
 			}
 
 			@Override
 			public void onScreenOff() {
-                mUseDb.insert(new Use("off"));
+                String today = DateUtil.getToday();
+                Use use = mUseDb.find(today);
+                if (use != null) {
+                    use.endTime = System.currentTimeMillis();
+                    mUseDb.update(use);
+                } else {
+                    use = new Use();
+
+                    String yesterday = DateUtil.getYesterday();
+                    Use yesterdayLastUse = mUseDb.findLastOne(yesterday);
+                    if (yesterdayLastUse != null) {
+                        yesterdayLastUse.endTime = DateUtil.getYesterdayEndTime();
+                        mUseDb.update(yesterdayLastUse);
+
+                        use.startTime = yesterdayLastUse.endTime + 1;
+                    } else {
+                        use.startTime = SpUtil.getInstance().getAppStartTime();
+                    }
+                    use.endTime = System.currentTimeMillis();
+                    mUseDb.insert(use);
+                }
             }
 
 			@Override
 			public void onUserPresent() {
-                mUseDb.insert(new Use("present"));
+
 			}
 		});
 
         List<Use> list = mUseDb.findAll();
         Log.d(TAG, "use size: " + list.size());
 
-//        String channel = ConfigManager.getInstance().getChannel();
-//        boolean isDebug = ConfigManager.getInstance().isDebug();
-//
-//        LogUtils.LOGGABLE = isDebug;
-//
-//        // 初始化Facebook Fresco
-//		Fresco.initialize(this);
-//
-//        // 初始化百度统计
-//        BaiduStatistics.init(channel);
-//
-//        // 初始化bugly，设置渠道
-//        CrashReport.UserStrategy strategy = new CrashReport.UserStrategy(this);
-//        strategy.setAppChannel(channel); //设置渠道
-//		CrashReport.initCrashReport(this, "900008867", isDebug, strategy);
+        ObserverService.startActionMonitor(this);
 	}
 
 	public static synchronized AppController getInstance() {

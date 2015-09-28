@@ -12,6 +12,8 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:name=".AppController"
@@ -31,10 +33,59 @@
         <activity android:name=".ui.StatsTimeActivity" />
         <activity android:name=".ui.MapActivity" />
 
+        <receiver android:name=".receiver.StaticBroadcastReceiver">
+            <!-- 开机启动 -->
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+
+                <category android:name="android.intent.category.HOME" />
+            </intent-filter>
+
+            <!-- 本地SD安装和卸载 -->
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_MOUNTED" />
+                <action android:name="android.intent.action.MEDIA_UNMOUNTED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="file" />
+            </intent-filter>
+
+            <!-- 网络变化和锁屏 -->
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+
+            <!-- 应用安装和卸载 -->
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+
+            <!-- 电量变化 -->
+            <intent-filter>
+                <action android:name="android.intent.action.BATTERY_OKAY" />
+                <action android:name="android.intent.action.BATTERY_LOW" />
+                <action android:name="android.intent.action.BATTERY_CHANGED" />
+            </intent-filter>
+        </receiver>
+
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="9a6f722f977d0e4b6d5c3d16adf1a373" />
 
+        <service
+            android:name=".service.ObserverService"
+            android:exported="false"
+            android:process=":PhoneObserverService"/>
+        <service
+            android:name=".service.GuardService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":PhoneObserverGuardService"/>
     </application>
 
 </manifest>

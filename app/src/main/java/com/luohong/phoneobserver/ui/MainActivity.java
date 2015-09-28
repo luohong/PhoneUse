@@ -2,10 +2,6 @@ package com.luohong.phoneobserver.ui;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -14,12 +10,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.luohong.phoneobserver.R;
-import com.luohong.phoneobserver.bean.AppInfo;
 import com.luohong.phoneobserver.bean.Use;
 import com.luohong.phoneobserver.db.UseDb;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -200,16 +194,16 @@ public class MainActivity extends Activity implements View.OnClickListener {
         long offset = 0;
         for (int i = 0; i < list.size(); ) {
             Use use = list.get(i);
-            if ("on".equals(use.action)) {
+            if ("on".equals(use.endTime)) {
                 i = i + 1;
                 if (i < list.size()) {
                     Use next = list.get(i);
-                    if ("off".equals(next.action)) {
-                        offset += next.time - use.time;
+                    if ("off".equals(next.endTime)) {
+                        offset += next.startTime - use.startTime;
                     }
                     i = i + 1;
                 } else if (dateOfWeek == week || (week == 8 && dateOfWeek == 1)) {// 当前正在使用
-                    offset += System.currentTimeMillis() - use.time;
+                    offset += System.currentTimeMillis() - use.startTime;
                 }
             } else {
                 i = i + 1;
