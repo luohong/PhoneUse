@@ -52,7 +52,7 @@ public class AppDb extends BaseDb {
         sb.append(Table.DATE).append(COLUMN_TYPE.TEXT).append(COMMA);
         sb.append(Table.START_TIME).append(COLUMN_TYPE.LONG).append(COMMA);
         sb.append(Table.DESC).append(COLUMN_TYPE.TEXT).append(COMMA);
-        sb.append(Table.END_TIME).append(COLUMN_TYPE.TEXT);
+        sb.append(Table.END_TIME).append(COLUMN_TYPE.LONG);
         sb.append(BRACKET_RIGHT);
 
         return sb.toString();

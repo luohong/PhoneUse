@@ -49,11 +49,14 @@ public class UseDb extends BaseDb {
         sb.append(Table._ID).append(COLUMN_TYPE.INTEGER).append(PRIMARY_KEY_AUTOINCREMENT).append(COMMA);
         sb.append(Table.DATE).append(COLUMN_TYPE.TEXT).append(COMMA);
         sb.append(Table.START_TIME).append(COLUMN_TYPE.LONG).append(COMMA);
-        sb.append(Table.END_TIME).append(COLUMN_TYPE.TEXT).append(COMMA);
+        sb.append(Table.END_TIME).append(COLUMN_TYPE.LONG).append(COMMA);
         sb.append(Table.DESC).append(COLUMN_TYPE.TEXT);
         sb.append(BRACKET_RIGHT);
 
-        return sb.toString();
+        String sql = sb.toString();
+        Log.e(TAG, sql);
+
+        return sql;
     }
 
     protected static String getDropTableSQL() {
@@ -100,8 +103,8 @@ public class UseDb extends BaseDb {
     public List<Use> findAllOnAndOff(String date) {
         List<Use> list = new ArrayList<Use>();
 
-        String selection = String.format(" %s = ? and ( %s = ? or %s = ?) ", Table.DATE, Table.END_TIME, Table.END_TIME);
-        String[] selectionArgs = new String[] { date, "on", "off" };
+        String selection = String.format(" %s = ? ", Table.DATE);
+        String[] selectionArgs = new String[] { date };
 
         Cursor cursor = null;
         try {
@@ -166,8 +169,8 @@ public class UseDb extends BaseDb {
     }
 
     public int findOpenCountByDate(String date) {
-        String selection = String.format(" %s = ? and %s = ? ", Table.DATE, Table.END_TIME);
-        String[] selectionArgs = new String[] { date, "on" };
+        String selection = String.format(" %s = ? ", Table.DATE, Table.END_TIME);
+        String[] selectionArgs = new String[] { date };
 
         Cursor cursor = null;
         List<Use> list = new ArrayList<Use>();
